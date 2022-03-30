@@ -1,4 +1,4 @@
-#pragma once
+//#pragma once
 //#pragma once是一个比较常用的C/C++杂注，
 //只要在头文件的最开始加入这条杂注，
 //就能够保证头文件只被编译一次。
@@ -27,8 +27,11 @@ private:
     int vexnum;   //图的顶点个数
     // int edge;     //图的边数
     int **arc;   //邻接矩阵
-    Dist * dist;   //记录各个顶点最短路径的信息
+    // Dist * dist_d;   //记录各个顶点最短路径的信息
+    // Dist * dist_s;
 public:
+    Dist * dist_d;   //记录各个顶点最短路径的信息
+    Dist * dist_s;
     //构造函数
     Graph_DG(int vexnum);
     // Graph_DG(int vexnum, int edge);
@@ -41,8 +44,9 @@ public:
     void createGraph(string file);
     //打印邻接矩阵
     void print();
-    //求最短路径
-    void Dijkstra(int begin);
+    //两种算法求最短路径
+    void Dijkstra(int begin, Dist *dist);
+    void stsr(int begin, Dist *dist);
     //打印最短路径
-    void print_path(int);
+    void print_path(int begin, Dist *dist);
 };
