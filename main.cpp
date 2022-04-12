@@ -33,15 +33,20 @@ int main() {
 
     Graph_DG graph(vexnum);
     graph.createGraph(filename);
-    graph.print();
+    graph.print_graph();
 
     int start;
     cout << "输入路径起点卫星的序号:" << endl;
     cin >> start;
     graph.Dijkstra(start, graph.dist_d);
+    // graph.print_path(start, graph.dist_d);
+    graph.fix_d(graph.dist_d, graph.dist_d_f);
+    graph.print_path(start, graph.dist_d_f);
     graph.stsr(start, graph.dist_s);
-    graph.print_path(start, graph.dist_d);
+    // graph.print_path(start, graph.dist_s);
+    graph.fix_stsr(graph.dist_d, graph.dist_s);
     graph.print_path(start, graph.dist_s);
+
     system("pause");
     return 0;
 }

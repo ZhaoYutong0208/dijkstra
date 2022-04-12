@@ -11,9 +11,22 @@ using namespace std;
 本程序是使用Dijkstra算法实现求解最短路径的问题
 采用的邻接矩阵来存储图
 */
+
+// 链表
+struct ListNode {
+	int val;
+	struct ListNode *next;
+	ListNode(int x) :
+			val(x), next(nullptr) {
+	}
+};
+
 //记录起点到每个顶点的最短路径的信息
 struct Dist {
-    int path[100]={0};//这里把路径数组初始化为零0了，意味着存储实际路径的时候，节点标号需要从1开始
+    // int path[100]={0};//这里把路径数组初始化为零0了，意味着存储实际路径的时候，节点标号需要从1开始
+    // 
+    ListNode *head = nullptr;
+    ListNode *tail = nullptr;
     int value;
     bool visit;
     Dist() {
@@ -31,6 +44,7 @@ private:
     // Dist * dist_s;
 public:
     Dist * dist_d;   //记录各个顶点最短路径的信息
+    Dist * dist_d_f;
     Dist * dist_s;
     //构造函数
     Graph_DG(int vexnum);
@@ -43,10 +57,15 @@ public:
     //创建图
     void createGraph(string file);
     //打印邻接矩阵
-    void print();
+    void print_graph();
     //两种算法求最短路径
     void Dijkstra(int begin, Dist *dist);
+    // 直接把d算法结果合法化
+    void fix_d(Dist *dist_d, Dist *dist_d_f);
+    // 直接选路算法
     void stsr(int begin, Dist *dist);
+    // 完善stsr未找到路径的部分
+    void fix_stsr(Dist *dist_d, Dist *dist_s);
     //打印最短路径
     void print_path(int begin, Dist *dist);
 };
